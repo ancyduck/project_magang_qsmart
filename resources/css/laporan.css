@@ -1,0 +1,86 @@
+.laporan-container {
+    padding: 20px;
+}
+
+/* HEADER */
+.laporan-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filter {
+    padding: 8px;
+    border-radius: 8px;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    padding: 15px;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.card span {
+    font-size: 12px;
+}
+
+/* COLOR */
+.blue { border-left: 4px solid #2563eb; }
+.green { border-left: 4px solid #16a34a; }
+.orange { border-left: 4px solid #f97316; }
+.purple { border-left: 4px solid #9333ea; }
+
+/* CHART */
+.charts {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    flex: 1;
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* BOTTOM */
+.bottom {
+    display: flex;
+    gap: 15px;
+}
+
+.box {
+    flex: 1;
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+/* PROGRESS */
+.progress {
+    margin: 10px 0;
+}
+
+.bar {
+    height: 8px;
+    border-radius: 10px;
+}
+
+.bar.blue { background: #2563eb; }
+.bar.green { background: #16a34a; }
+.bar.orange { background: #f97316; }
