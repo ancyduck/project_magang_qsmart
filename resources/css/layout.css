@@ -369,3 +369,93 @@ flex:1;
 padding:25px;
 
 }
+
+
+/* Tablet */
+@media (max-width: 1024px){
+
+.dashboard-cards{
+grid-template-columns:repeat(2,1fr);
+}
+
+.produk-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.cards{
+flex-direction:column;
+}
+
+.charts{
+flex-direction:column;
+}
+
+.bottom{
+flex-direction:column;
+}
+
+}
+
+/* Mobile */
+@media (max-width: 768px){
+
+.layout{
+flex-direction:column;
+}
+
+/* SIDEBAR MOBILE */
+.sidebar{
+position:fixed;
+left:-220px;
+top:0;
+z-index:1000;
+transition:0.3s;
+}
+
+.sidebar.active{
+left:0;
+}
+
+/* CONTENT FULL */
+.content{
+padding:15px;
+}
+
+/* DASHBOARD */
+.dashboard-cards{
+grid-template-columns:1fr;
+}
+
+/* TRANSAKSI */
+.transaksi-container{
+flex-direction:column;
+}
+
+.cart-area{
+width:100%;
+}
+
+/* PRODUK */
+.produk-grid{
+grid-template-columns:1fr;
+}
+
+/* LAPORAN */
+.cards{
+flex-direction:column;
+}
+
+.charts{
+flex-direction:column;
+}
+
+.bottom{
+flex-direction:column;
+}
+
+/* STOK */
+.summary{
+flex-direction:column;
+}
+
+}
