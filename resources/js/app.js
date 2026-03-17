@@ -1,123 +1,154 @@
-let cart=[]
+import './sidebar';
 
-function tambahKeranjang(nama,harga){
+// Data keranjang
+let cart = []
 
-let item=cart.find(p=>p.nama===nama)
+// Tambah ke keranjang
+window.tambahKeranjang = function(nama, harga){
+
+let item = cart.find(p => p.nama === nama)
 
 if(item){
-item.qty++
+    item.qty++
 }else{
-cart.push({nama,harga,qty:1})
+    cart.push({nama, harga, qty:1})
 }
 
 renderCart()
 
 }
 
+// Render keranjang
 function renderCart(){
 
-let html=""
-let subtotal=0
+const cartContainer = document.getElementById("cartItems")
+const subtotalEl = document.getElementById("subtotal")
+const taxEl = document.getElementById("tax")
+const totalEl = document.getElementById("total")
+
+if(!cartContainer) return
+
+let html = ""
+let subtotal = 0
 
 cart.forEach((item,i)=>{
 
-subtotal+=item.harga*item.qty
+subtotal += item.harga * item.qty
 
-html+=`
-<div>
+html += `
+<div class="cart-item">
 
-${item.nama}
+<span>${item.nama}</span>
 
+<div class="qty-control">
 <button onclick="kurang(${i})">-</button>
-
-${item.qty}
-
+<span>${item.qty}</span>
 <button onclick="tambah(${i})">+</button>
+</div>
 
-<button onclick="hapus(${i})">🗑</button>
+<span>${formatRupiah(item.harga * item.qty)}</span>
+
+<button class="delete-btn" onclick="hapus(${i})">🗑</button>
 
 </div>
 `
 
 })
 
-document.getElementById("cartItems").innerHTML=html
+cartContainer.innerHTML = html
 
-let tax=subtotal*0.1
-let total=subtotal+tax
+let tax = subtotal * 0.1
+let total = subtotal + tax
 
-document.getElementById("subtotal").innerText=subtotal
-document.getElementById("tax").innerText=tax
-document.getElementById("total").innerText=total
+if(subtotalEl) subtotalEl.innerText = formatRupiah(subtotal)
+if(taxEl) taxEl.innerText = formatRupiah(tax)
+if(totalEl) totalEl.innerText = formatRupiah(total)
 
 }
 
-function tambah(i){
-
+// Tambah quantity
+window.tambah = function(i){
 cart[i].qty++
 renderCart()
-
 }
 
-function kurang(i){
+// Kurangi quantity
+window.kurang = function(i){
 
 cart[i].qty--
 
-if(cart[i].qty<=0) cart.splice(i,1)
+if(cart[i].qty <= 0){
+cart.splice(i,1)
+}
 
 renderCart()
 
 }
 
-function hapus(i){
+// Hapus item
+window.hapus = function(i){
 
 cart.splice(i,1)
 renderCart()
 
 }
 
-function bayar(){
+// Proses pembayaran
+window.bayar = function(){
 
-alert("Pembayaran berhasil")
-cart=[]
+if(cart.length === 0){
+alert("Keranjang kosong!")
+return
+}
+
+alert("Pembayaran berhasil!")
+
+cart = []
 renderCart()
 
 }
 
-/* search */
+// Format rupiah
+function formatRupiah(angka){
+return "Rp " + angka.toLocaleString("id-ID")
+}
 
-function searchProduk(){
+// Search produk
+window.searchProduk = function(){
 
-let input=document.getElementById("search").value.toLowerCase()
+let input = document.getElementById("search")
+if(!input) return
 
-let cards=document.querySelectorAll(".produk-card")
+let keyword = input.value.toLowerCase()
+let cards = document.querySelectorAll(".produk-card")
 
 cards.forEach(card=>{
 
-let text=card.innerText.toLowerCase()
+let text = card.innerText.toLowerCase()
 
-card.style.display=text.includes(input)?"block":"none"
+card.style.display = text.includes(keyword) ? "block" : "none"
 
 })
 
 }
 
-/* filter */
+// Filter kategori
+window.filterKategori = function(){
 
-function filterKategori(){
+let select = document.getElementById("kategoriFilter")
+if(!select) return
 
-let kategori=document.getElementById("kategoriFilter").value
-
-let cards=document.querySelectorAll(".produk-card")
+let kategori = select.value
+let cards = document.querySelectorAll(".produk-card")
 
 cards.forEach(card=>{
 
-let cat=card.dataset.kategori
+let cat = card.dataset.kategori
 
-if(kategori==="all"||cat===kategori){
-card.style.display="block"
+if(kategori === "all" || cat === kategori){
+card.style.display = "block"
 }else{
-card.style.display="none"
+card.style.display = "none"
 }
 
 })
