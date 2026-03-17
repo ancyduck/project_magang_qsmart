@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
-    <title>POS Kasir</title>
+<title>POS Kasir</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+@vite(['resources/css/app.css','resources/js/app.js'])
 
 </head>
 
 <body>
 
-    <div class="layout">
+<div class="app-container">
 
-        <!-- SIDEBAR -->
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
 
-        <x-sidebar></x-sidebar>
+<h2 class="logo">POS</h2>
 
-        <!-- CONTENT -->
+<a href="/dashboard">Dashboard</a>
+<a href="/transaksi">Transaksi</a>
+<a href="/stok">Stok Barang</a>
+<a href="/laporan">Laporan</a>
+<a href="/logout">Logout</a>
 
-        <div class="content">
+</div>
 
-            @yield('content')
+<!-- Main -->
+<div class="main-content">
 
-        </div>
+<!-- Topbar -->
+<div class="topbar">
 
-    </div>
+<button id="menu-toggle">☰</button>
+
+<h3>@yield('title')</h3>
+
+</div>
+
+<div class="content">
+
+@yield('content')
+
+</div>
+
+</div>
+
+</div>
+
+<script src="{{ asset('resources/js/sidebar.js') }}"></script>
 
 </body>
-
 </html>
