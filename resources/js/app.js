@@ -1,153 +1,120 @@
 import './sidebar';
 
 // Data keranjang
-let cart = []
+let cart = [];
 
 // Tambah ke keranjang
 window.tambahKeranjang = function(nama, harga){
+    let item = cart.find(i => i.nama === nama);
 
-let item = cart.find(p => p.nama === nama)
+    if (item) {
+        item.qty++;
+    } else {
+        cart.push({ nama, harga, qty: 1 });
+    }
 
-if(item){
-    item.qty++
-}else{
-    cart.push({nama, harga, qty:1})
-}
-
-renderCart()
-
-}
+    renderCart();
+};
 
 // Render keranjang
 function renderCart(){
+    const container = document.getElementById('cartItems');
+    if (!container) return;
 
-const cartContainer = document.getElementById("cartItems")
-const subtotalEl = document.getElementById("subtotal")
-const taxEl = document.getElementById("tax")
-const totalEl = document.getElementById("total")
+    container.innerHTML = "";
 
-if(!cartContainer) return
+    let subtotal = 0;
 
-let html = ""
-let subtotal = 0
+    cart.forEach((item, i) => {
+        subtotal += item.harga * item.qty;
 
-cart.forEach((item,i)=>{
+        container.innerHTML += `
+            <div class="flex justify-between items-center">
+                <span>${item.nama} x${item.qty}</span>
+                <span>${formatRupiah(item.harga * item.qty)}</span>
+            </div>
+        `;
+    });
 
-subtotal += item.harga * item.qty
+    let tax = subtotal * 0.1;
+    let total = subtotal + tax;
 
-html += `
-<div class="cart-item">
+    const subtotalEl = document.getElementById('subtotal');
+    const taxEl = document.getElementById('tax');
+    const totalEl = document.getElementById('total');
 
-<span>${item.nama}</span>
-
-<div class="qty-control">
-<button onclick="kurang(${i})">-</button>
-<span>${item.qty}</span>
-<button onclick="tambah(${i})">+</button>
-</div>
-
-<span>${formatRupiah(item.harga * item.qty)}</span>
-
-<button class="delete-btn" onclick="hapus(${i})">🗑</button>
-
-</div>
-`
-
-})
-
-cartContainer.innerHTML = html
-
-let total = subtotal
-
-if(subtotalEl) subtotalEl.innerText = formatRupiah(subtotal)
-if(totalEl) totalEl.innerText = formatRupiah(total)
+    if(subtotalEl) subtotalEl.innerText = formatRupiah(subtotal);
+    if(taxEl) taxEl.innerText = formatRupiah(tax);
+    if(totalEl) totalEl.innerText = formatRupiah(total);
 }
 
-// Tambah quantity
+// Tambah qty
 window.tambah = function(i){
-cart[i].qty++
-renderCart()
+    cart[i].qty++;
+    renderCart();
 }
 
-// Kurangi quantity
+// Kurang qty
 window.kurang = function(i){
-
-cart[i].qty--
-
-if(cart[i].qty <= 0){
-cart.splice(i,1)
-}
-
-renderCart()
-
+    cart[i].qty--;
+    if(cart[i].qty <= 0){
+        cart.splice(i,1);
+    }
+    renderCart();
 }
 
 // Hapus item
 window.hapus = function(i){
-
-cart.splice(i,1)
-renderCart()
-
+    cart.splice(i,1);
+    renderCart();
 }
 
-// Proses pembayaran
+// Bayar
 window.bayar = function(){
+    if(cart.length === 0){
+        alert("Keranjang kosong!");
+        return;
+    }
 
-if(cart.length === 0){
-alert("Keranjang kosong!")
-return
-}
-
-alert("Pembayaran berhasil!")
-
-cart = []
-renderCart()
-
+    alert("Pembayaran berhasil!");
+    cart = [];
+    renderCart();
 }
 
 // Format rupiah
 function formatRupiah(angka){
-return "Rp " + angka.toLocaleString("id-ID")
+    return "Rp " + angka.toLocaleString("id-ID");
 }
 
 // Search produk
 window.searchProduk = function(){
+    let input = document.getElementById("search");
+    if(!input) return;
 
-let input = document.getElementById("search")
-if(!input) return
+    let keyword = input.value.toLowerCase();
+    let cards = document.querySelectorAll(".produk-card");
 
-let keyword = input.value.toLowerCase()
-let cards = document.querySelectorAll(".produk-card")
-
-cards.forEach(card=>{
-
-let text = card.innerText.toLowerCase()
-
-card.style.display = text.includes(keyword) ? "block" : "none"
-
-})
-
+    cards.forEach(card=>{
+        let text = card.innerText.toLowerCase();
+        card.style.display = text.includes(keyword) ? "block" : "none";
+    });
 }
 
 // Filter kategori
 window.filterKategori = function(){
+    let select = document.getElementById("kategoriFilter");
+    if(!select) return;
 
-let select = document.getElementById("kategoriFilter")
-if(!select) return
+    let kategori = select.value;
+    let cards = document.querySelectorAll(".produk-card");
 
-let kategori = select.value
-let cards = document.querySelectorAll(".produk-card")
+    cards.forEach(card=>{
+        let cat = card.dataset.kategori;
 
-cards.forEach(card=>{
-
-let cat = card.dataset.kategori
-
-if(kategori === "all" || cat === kategori){
-card.style.display = "block"
-}else{
-card.style.display = "none"
-}
-
-})
-
+        if(kategori === "all" || cat === kategori){
+            card.style.display = "block";
+        }else{
+            card.style.display = "none";
+        }
+    });
 }

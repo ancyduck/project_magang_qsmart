@@ -1,7 +1,6 @@
 body{
 
 margin:0;
-font-family:Arial, Helvetica, sans-serif;
 background:#f5f6fa;
 
 }
@@ -281,7 +280,6 @@ border-radius:8px;
 .sidebar{
 
 width:220px;
-background:#1f2937;
 color:white;
 height:100vh;
 padding:20px 0;
@@ -292,6 +290,7 @@ padding:20px 0;
 
 display:flex;
 align-items:center;
+justify-content: center;
 gap:10px;
 padding:0 20px;
 margin-bottom:30px;
@@ -323,12 +322,6 @@ padding:12px 20px;
 color:white;
 text-decoration:none;
 transition:0.2s;
-
-}
-
-.menu a:hover{
-
-background:#374151;
 
 }
 
