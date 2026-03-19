@@ -2,28 +2,94 @@
 
 @section('content')
 
-<h1>Dashboard</h1>
+<div class="container">
 
-<div class="dashboard-cards">
+<!-- PRODUK AREA -->
+<div class="produk-area">
 
-<div class="card">
-<h3>Total Produk</h3>
-<p>120</p>
+<div class="search-bar">
+
+<input id="search"
+type="text"
+placeholder="Cari barang..."
+onkeyup="searchProduk()">
+
+<select id="kategoriFilter"
+onchange="filterKategori()">
+
+<option value="all">Semua Kategori</option>
+<option value="makanan">Makanan</option>
+<option value="minuman">Minuman</option>
+
+</select>
+
 </div>
 
-<div class="card">
-<h3>Total Transaksi</h3>
-<p>54</p>
+<div class="produk-grid" id="produkGrid">
+
+@forelse($produk as $p)
+
+<div class="produk-card"
+data-kategori="{{ $p->kategori }}">
+
+<div class="card-body">
+
+<div class="kode">{{ $p->kode }}</div>
+
+<div class="nama">{{ $p->nama }}</div>
+
+<div class="harga">
+Rp {{ number_format($p->harga) }}
 </div>
 
-<div class="card">
-<h3>Pendapatan Hari Ini</h3>
-<p>Rp 1.200.000</p>
+<button onclick="tambahKeranjang('{{ $p->nama }}', {{ $p->harga }})">
++ Tambah
+</button>
+
 </div>
 
-<div class="card">
-<h3>Stok Hampir Habis</h3>
-<p>5</p>
+</div>
+
+@empty
+
+<div class="empty-produk">
+📦 Belum ada produk
+</div>
+
+@endforelse
+
+</div>
+
+</div>
+
+<!-- CART -->
+<div class="cart">
+
+<div class="cart-header">
+Keranjang Belanja
+</div>
+
+<div id="cartItems" class="cart-body">
+</div>
+
+<div class="cart-footer">
+
+<div>
+Subtotal :
+<span id="subtotal">Rp 0</span>
+</div>
+
+<div class="total">
+Total :
+<span id="total">Rp 0</span>
+</div>
+
+<button onclick="bayar()" class="btn-bayar">
+Bayar Sekarang
+</button>
+
+</div>
+
 </div>
 
 </div>
