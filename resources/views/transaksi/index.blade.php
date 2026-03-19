@@ -2,57 +2,102 @@
 
 @section('content')
 
-<h1>Transaksi</h1>
+<div class="transaksi-page">
 
-<div class="transaksi-container">
+<div class="page-header">
 
-<div class="produk-area">
-
-<input type="text" id="search" placeholder="Cari produk..." onkeyup="searchProduk()">
-
-<select id="kategoriFilter" onchange="filterKategori()">
-
-<option value="all">Semua</option>
-<option value="makanan">Makanan</option>
-<option value="minuman">Minuman</option>
-
-</select>
-
-<div class="produk-grid" id="produkList">
-
-<div class="produk-card" data-kategori="makanan"
-onclick="tambahKeranjang('Nasi Goreng',25000)">
-Nasi Goreng<br>Rp 25.000
+<div>
+<h2>Riwayat Transaksi</h2>
+<p>Lihat dan kelola riwayat transaksi penjualan</p>
 </div>
 
-<div class="produk-card" data-kategori="makanan"
-onclick="tambahKeranjang('Mie Goreng',20000)">
-Mie Goreng<br>Rp 20.000
-</div>
-
-<div class="produk-card" data-kategori="minuman"
-onclick="tambahKeranjang('Es Teh',5000)">
-Es Teh<br>Rp 5.000
-</div>
+<button class="btn-export">
+Ekspor Data
+</button>
 
 </div>
 
+<div class="search-box">
+<input type="text" placeholder="Cari berdasarkan ID transaksi...">
 </div>
 
-<div class="cart-area">
+<div class="table-container">
 
-<h3>Keranjang</h3>
+<table>
 
-<div id="cartItems"></div>
+<thead>
 
-<hr>
+<tr>
+<th>ID Transaksi</th>
+<th>Tanggal & Waktu</th>
+<th>Items</th>
+<th>Metode Bayar</th>
+<th>Total</th>
+<th>Aksi</th>
+</tr>
 
-<p>Subtotal : <span id="subtotal">0</span></p>
-<p>Pajak 10% : <span id="tax">0</span></p>
+</thead>
 
-<h3>Total : <span id="total">0</span></h3>
+<tbody>
 
-<button onclick="bayar()">Bayar</button>
+<tr>
+<td>TRX-001</td>
+<td>14 Mar 2026, 10.30</td>
+<td>
+Nasi Goreng x2<br>
+Es Teh Manis x2
+</td>
+<td><span class="badge tunai">Tunai</span></td>
+<td class="total">Rp 66.000</td>
+<td><button class="btn-detail">Detail</button></td>
+</tr>
+
+<tr>
+<td>TRX-002</td>
+<td>14 Mar 2026, 11.15</td>
+<td>
+Sate Ayam x1<br>
+Jus Jeruk x1
+</td>
+<td><span class="badge qris">QRIS</span></td>
+<td class="total">Rp 42.000</td>
+<td><button class="btn-detail">Detail</button></td>
+</tr>
+
+<tr>
+<td>TRX-003</td>
+<td>14 Mar 2026, 12.00</td>
+<td>
+Bakso x3<br>
+Air Mineral x3
+</td>
+<td><span class="badge debit">Debit</span></td>
+<td class="total">Rp 75.000</td>
+<td><button class="btn-detail">Detail</button></td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="summary-cards">
+
+<div class="card">
+<p>Total Transaksi</p>
+<h3>3</h3>
+</div>
+
+<div class="card">
+<p>Total Penjualan</p>
+<h3 class="green">Rp 183.000</h3>
+</div>
+
+<div class="card">
+<p>Rata-rata</p>
+<h3 class="orange">Rp 61.000</h3>
+</div>
 
 </div>
 
