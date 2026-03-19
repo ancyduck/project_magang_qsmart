@@ -2,57 +2,72 @@
 
 @section('content')
 
-<h1>Transaksi</h1>
+<div class="transaksi-page">
 
-<div class="transaksi-container">
+<div class="page-header">
 
-<div class="produk-area">
-
-<input type="text" id="search" placeholder="Cari produk..." onkeyup="searchProduk()">
-
-<select id="kategoriFilter" onchange="filterKategori()">
-
-<option value="all">Semua</option>
-<option value="makanan">Makanan</option>
-<option value="minuman">Minuman</option>
-
-</select>
-
-<div class="produk-grid" id="produkList">
-
-<div class="produk-card" data-kategori="makanan"
-onclick="tambahKeranjang('Nasi Goreng',25000)">
-Nasi Goreng<br>Rp 25.000
+<div>
+<h2>Riwayat Transaksi</h2>
+<p>Lihat dan kelola riwayat transaksi penjualan</p>
 </div>
 
-<div class="produk-card" data-kategori="makanan"
-onclick="tambahKeranjang('Mie Goreng',20000)">
-Mie Goreng<br>Rp 20.000
-</div>
-
-<div class="produk-card" data-kategori="minuman"
-onclick="tambahKeranjang('Es Teh',5000)">
-Es Teh<br>Rp 5.000
-</div>
+<button class="btn-export">
+Ekspor Data
+</button>
 
 </div>
 
+<div class="search-box">
+<input type="text" placeholder="Cari berdasarkan ID transaksi...">
 </div>
 
-<div class="cart-area">
+<div class="table-container">
 
-<h3>Keranjang</h3>
+<table>
 
-<div id="cartItems"></div>
+<thead>
 
-<hr>
+<tr>
+<th>ID Transaksi</th>
+<th>Tanggal & Waktu</th>
+<th>Items</th>
+<th>Metode Bayar</th>
+<th>Total</th>
+<th>Aksi</th>
+</tr>
 
-<p>Subtotal : <span id="subtotal">0</span></p>
-<p>Pajak 10% : <span id="tax">0</span></p>
+</thead>
 
-<h3>Total : <span id="total">0</span></h3>
+<tbody id="transaksiBody">
 
-<button onclick="bayar()">Bayar</button>
+<tr>
+<td colspan="6" class="empty-state">
+📦 Belum ada transaksi
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="summary-cards">
+
+<div class="card">
+<p>Total Transaksi</p>
+<h3>0</h3>
+</div>
+
+<div class="card">
+<p>Total Penjualan</p>
+<h3 class="green">Rp 0</h3>
+</div>
+
+<div class="card">
+<p>Rata-rata</p>
+<h3 class="orange">Rp 0</h3>
+</div>
 
 </div>
 
