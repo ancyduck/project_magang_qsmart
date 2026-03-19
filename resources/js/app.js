@@ -57,13 +57,10 @@ html += `
 
 cartContainer.innerHTML = html
 
-let tax = subtotal * 0.1
-let total = subtotal + tax
+let total = subtotal
 
 if(subtotalEl) subtotalEl.innerText = formatRupiah(subtotal)
-if(taxEl) taxEl.innerText = formatRupiah(tax)
 if(totalEl) totalEl.innerText = formatRupiah(total)
-
 }
 
 // Tambah quantity
