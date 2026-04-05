@@ -52,7 +52,6 @@
 
         </div>
 
-        <!-- ================= KERANJANG ================= -->
         <div class="w-1/3">
 
             <div class="bg-white rounded-lg shadow p-4 flex flex-col h-[80vh]">
