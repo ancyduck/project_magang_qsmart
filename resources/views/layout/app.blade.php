@@ -1,53 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>POS Kasir</title>
+    <title>POS Kasir</title>
 
-@vite(['resources/css/app.css','resources/js/app.js'])
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
 
-<body>
+<body class="font-sans">
 
-<div class="app-container">
+    <div class="flex min-h-screen bg-gray-100">
+        <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-30 md:hidden" onclick="toggleSidebar()"></div>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
+        <!-- Sidebar -->
+        <x-sidebar />
 
-<h2 class="logo">POS</h2>
+        <!-- Main Area -->
+        <div class="flex-1 flex flex-col">
 
-<a href="/dashboard">Dashboard</a>
-<a href="/transaksi">Transaksi</a>
-<a href="/stok">Stok Barang</a>
-<a href="/laporan">Laporan</a>
-<a href="/logout">Logout</a>
+            <!-- Header -->
+            <header class="h-16 bg-white border-b flex items-center justify-between px-6">
+                <!-- KIRI -->
+                <div class="flex items-center gap-4">
+                    <!-- tombol mobile -->
+                    <button class="md:hidden text-gray-700" onclick="toggleSidebar()">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
 
-</div>
+                    <h1 class="text-lg font-semibold">
+                        @yield('content_title')
+                    </h1>
+                </div>
+                <!-- KANAN -->
+                <div class="text-sm text-gray-600">
+                    {{ auth()->user()->name ?? 'Guest' }}
+                </div>
+            </header>
 
-<!-- Main -->
-<div class="main-content">
+            <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-30 md:hidden" onclick="toggleSidebar()"></div>
 
-<!-- Topbar -->
-<div class="topbar">
+            <!-- Content -->
+            <main class="flex-1 p-6 bg-gray-50">
+                @yield('content')
+            </main>
 
-<button id="menu-toggle">☰</button>
+        </div>
 
-<h3>@yield('title')</h3>
-
-</div>
-
-<div class="content">
-
-@yield('content')
-
-</div>
-
-</div>
-
-</div>
-
-<script src="{{ asset('resources/js/sidebar.js') }}"></script>
+    </div>
 
 </body>
+
 </html>
